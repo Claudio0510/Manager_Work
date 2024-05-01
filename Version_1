@@ -1,0 +1,144 @@
+import tkinter as tk
+import json
+
+#To know how many windows are created 
+List_Created = 0
+
+#Create and array to know how many windows has been created 
+List_Created_Array = []
+
+#Create array to know how many messages are on the list
+List_Message = []
+
+
+def Create_List():
+    
+    #To know how many windows has been created
+    global List_Created
+    List_Created += 1 
+    
+    #To can work with all the functions
+    global ventana_secundaria
+    
+    #Create the screens 
+    ventana_secundaria = tk.Toplevel(Main_Screen)
+    #Name of the screens 
+    Name_Windows = "List" + " " + str(List_Created)
+    ventana_secundaria.title(Name_Windows)
+    #Size of the list 
+    ventana_secundaria.geometry("400x800")
+    
+    #To putt all the windows on the array 
+    List_Created_Array.append(ventana_secundaria)
+    
+
+    
+
+    
+    #Function to create the button on the screen created 
+    Putt_Something = tk.Button(ventana_secundaria , text = "Putt_Something", command= Create_Box_Write)
+    Putt_Something.place(x= 0 , y = 750)
+    
+    #Function to create the button to create the Button 
+    Create_Button = tk.Button(ventana_secundaria , text = "Create Button" , command= Create_Work)
+    Create_Button.place(x= 100 , y = 750)
+    
+    #Remove the box write button 
+    Remove_Button = tk.Button(ventana_secundaria , text = "Remove Button" , command= Remove_Box_Write)
+    Remove_Button.place(x = 200 , y = 750)
+    
+
+def Create_Box_Write():
+    
+    #To can work on all the function with the box write
+    global Box_Write
+    
+    #Create the box to write on the window
+    Box_Write = tk.Text(ventana_secundaria , width=45 , height = 10)
+    Box_Write.place (x = 0 , y = 25)
+    
+
+def Remove_Box_Write():
+    
+    #Remove the write collider 
+    Box_Write.destroy()
+
+def Create_Work():
+    
+    #Get the information from the  Box_Write
+    Phrase = Box_Write.get("1.0", "end-1c")
+    
+    
+    if Phrase:
+        
+        Text_OnScreen = tk.Label(ventana_secundaria , text = Phrase)
+        #Putt the text on the screen 
+        Text_OnScreen.pack()
+        
+        #To putt the messages on the array 
+        List_Message.append(Text_OnScreen)
+        
+        # Adjust the label's width and height based on the text size
+        Text_OnScreen.config(width=50, height= 10)
+        
+        #Function to create the button on the screen created 
+        Putt_Something = tk.Button(ventana_secundaria , text = "Putt_Something", command= Create_Box_Write)
+        Putt_Something.place(x= 0 , y = 750)
+    
+        #Function to create the button to create the Button 
+        Create_Button = tk.Button(ventana_secundaria , text = "Create Button" , command= Create_Work)
+        Create_Button.place(x= 100 , y = 750)
+    
+        #Remove the box write button 
+        Remove_Button = tk.Button(ventana_secundaria , text = "Remove Button" , command= Remove_Box_Write)
+        Remove_Button.place(x = 200 , y = 750)
+
+        
+        #Remove the box write 
+        Box_Write.destroy()
+
+
+         
+         
+         
+
+
+
+    
+    
+    
+    
+
+    
+
+#Create the screen 
+Main_Screen = tk.Tk()
+Main_Screen.geometry("300x300")
+Main_Screen.title("Make work")
+
+
+
+#Function to create the button on the screen created 
+Create_List = tk.Button(Main_Screen , text = "Create List", command= Create_List)
+Create_List.place(x= 0 , y = 0)
+
+#Save everything on this work 
+Save_List = tk.Button(Main_Screen , text = "Save", command= Save_List)
+Save_List.place( x = 0 , y = 30)
+
+#Load json 
+Load_List = tk .Button(Main_Screen , text = "Load List")
+Load_List.place(x = 0 , y  = 60)
+
+#Remove json 
+Remove_List = tk.Button(Main_Screen , text = "Remove_Save")
+Remove_List.place(x= 0 , y = 90)
+
+
+
+
+
+
+#Make work the screen 
+Main_Screen.mainloop()
+
